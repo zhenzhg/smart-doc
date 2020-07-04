@@ -62,7 +62,7 @@
     display: inline
 }
 
-.book-summary ul.summary li a, .book-summary {
+.book-summary ul.summary li a{
     display: block;
     padding: 10px 15px;
     border-bottom: 0;
