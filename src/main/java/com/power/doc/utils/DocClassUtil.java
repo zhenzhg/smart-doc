@@ -167,65 +167,52 @@ public class DocClassUtil {
         }
         switch (javaTypeName) {
             case "java.lang.String":
-                return "string";
+            case "date":
             case "string":
-                return "string";
             case "char":
+            case "localdatetime":
+            case "localdate":
+            case "localtime":
+            case "timestamp":
                 return "string";
             case "java.util.List":
-                return "array";
             case "list":
                 return "array";
             case "java.lang.Integer":
-                return "int32";
             case "integer":
-                return "int32";
             case "int":
                 return "int32";
             case "short":
-                return "int16";
             case "java.lang.Short":
                 return "int16";
+            case "java.lang.Double":
             case "double":
                 return "double";
             case "java.lang.Long":
-                return "int64";
             case "long":
                 return "int64";
             case "java.lang.Float":
-                return "float";
             case "float":
                 return "float";
             case "bigdecimal":
-                return "number";
             case "biginteger":
+            case "java.math.BigDecimal":
+            case "java.math.BigInteger":
                 return "number";
             case "java.lang.Boolean":
-                return "boolean";
             case "boolean":
                 return "boolean";
             case "java.util.Byte":
-                return "string";
             case "byte":
-                return "string";
+                return "byte";
+            case "java.util.Map":
             case "map":
                 return "map";
-            case "date":
-                return "string";
-            case "localdatetime":
-                return "string";
-            case "localdate":
-                return "string";
-            case "localtime":
-                return "string";
-            case "timestamp":
-                return "string";
             case "multipartfile":
                 return "file";
             default:
                 return "object";
         }
-
     }
 
     /**

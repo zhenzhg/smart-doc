@@ -37,6 +37,8 @@ import com.thoughtworks.qdox.model.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static com.power.doc.utils.DocClassUtil.processTypeNameForParams;
+
 /**
  * @author yu 2019/12/21.
  */
@@ -80,7 +82,7 @@ public class ParamsBuildHelper {
         }
         List<DocJavaField> fields = JavaClassUtil.getFields(cls, 0, new HashSet<>());
         if (JavaClassValidateUtil.isPrimitive(simpleName)) {
-            String processedType = isShowJavaType ? simpleName : DocClassUtil.processTypeNameForParams(simpleName.toLowerCase());
+            String processedType = isShowJavaType ? simpleName : processTypeNameForParams(simpleName.toLowerCase());
             paramList.addAll(primitiveReturnRespComment(processedType));
         } else if (JavaClassValidateUtil.isCollection(simpleName) || JavaClassValidateUtil.isArray(simpleName)) {
             if (!JavaClassValidateUtil.isCollection(globGicName[0])) {
@@ -203,7 +205,7 @@ public class ParamsBuildHelper {
                 }
                 if (JavaClassValidateUtil.isPrimitive(subTypeName)) {
                     ApiParam param = ApiParam.of().setField(pre + fieldName);
-                    String processedType = isShowJavaType ? typeSimpleName : DocClassUtil.processTypeNameForParams(typeSimpleName.toLowerCase());
+                    String processedType = isShowJavaType ? typeSimpleName : processTypeNameForParams(typeSimpleName.toLowerCase());
                     param.setType(processedType);
                     if (StringUtil.isNotEmpty(comment)) {
                         commonHandleParam(paramList, param, isRequired, comment, since, strRequired);
@@ -235,7 +237,20 @@ public class ParamsBuildHelper {
                     }
                     //如果已经设置返回类型 不需要再次设置
                     if (param.getType() == null) {
-                        String processedType = isShowJavaType ? typeSimpleName : DocClassUtil.processTypeNameForParams(typeSimpleName.toLowerCase());
+                        String processedType = "object";
+                        if (JavaClassValidateUtil.isCollection(subTypeName) || JavaClassValidateUtil.isArray(subTypeName)) {
+                            String gicName = processedType;
+                            if (fieldGicName.contains("<")) {
+                                gicName = fieldGicName.substring(fieldGicName.indexOf("<") + 1, fieldGicName.lastIndexOf(">"));
+                            } else if (fieldGicName.contains("[")) {
+                                gicName = fieldGicName.substring(0, fieldGicName.indexOf("["));
+                            }
+
+                            processedType = "array of " + (JavaClassValidateUtil.isPrimitive(gicName) ? processTypeNameForParams(gicName) : gicName);
+
+                        } else {
+                            processedType = isShowJavaType ? typeSimpleName : processTypeNameForParams(typeSimpleName.toLowerCase());
+                        }
                         param.setType(processedType);
                     }
                     if (!isResp && javaClass.isEnum()) {
@@ -351,6 +366,7 @@ public class ParamsBuildHelper {
                         } else if (!JavaClassValidateUtil.isPrimitive(fieldGicName)) {
                             paramList.addAll(buildParams(fieldGicName, preBuilder.toString(), nextLevel, isRequired, responseFieldMap, isResp, registryClasses, projectBuilder, groupClasses));
                         }
+
                     } else if (simpleName.equals(subTypeName)) {
                         //do nothing
                     } else {

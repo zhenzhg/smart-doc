@@ -65,10 +65,6 @@ public interface IDocBuildTemplate<T> {
     default String paramCommentResolve(String comment) {
         if (StringUtil.isEmpty(comment)) {
             comment = DocGlobalConstants.NO_COMMENTS_FOUND;
-        } else {
-            if (comment.contains("|")) {
-                comment = comment.substring(0, comment.indexOf("|"));
-            }
         }
         return comment;
     }

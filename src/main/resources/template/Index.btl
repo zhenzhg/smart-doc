@@ -24,7 +24,7 @@
                    for(api in apiDocList){
                    %>
                     <li class="chapter " data-level="${api.alias}" data-path="${api.alias}.html">
-                       <a href="javascript:void(0)" onclick="go('${api.alias}', '${api.desc}');">${api.order} ${api.desc}</a>
+                       <a href="javascript:void(0)" onclick="go('${api.name}', '${api.alias}');">${api.order} ${api.name}</a>
                         <ul class="articles">
                             <%
                             for(doc in api.list){
@@ -115,13 +115,11 @@
                 searchArr.push({
                     alias: '${api.alias}',
                     order: '${api.order}',
-                    desc: '${api.desc}',
                     list: []
                 })
                 api.push({
                     alias: '${api.alias}',
                     order: '${api.order}',
-                    desc: '${api.desc}',
                     list: []
                 })
                 <% for(doc in api.list) {  %>
