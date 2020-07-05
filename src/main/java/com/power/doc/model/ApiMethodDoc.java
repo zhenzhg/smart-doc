@@ -134,6 +134,8 @@ public class ApiMethodDoc implements Serializable {
      */
     private List<ApiParam> responseParams;
 
+    private ApiParam returnDesc;
+
     /**
      * method deprecated
      */
@@ -290,5 +292,13 @@ public class ApiMethodDoc implements Serializable {
 
     public void setDeprecated(boolean deprecated) {
         this.deprecated = deprecated;
+    }
+
+    public ApiParam getReturnDesc() {
+        return returnDesc;
+    }
+
+    public void setReturnDesc(ApiParam returnDesc) {
+        this.returnDesc = returnDesc;
     }
 }

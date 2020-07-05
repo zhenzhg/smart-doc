@@ -1,8 +1,11 @@
+# ${desc} <a name="${desc}"></a>
 
-# ${desc}
+<a href="${desc}.js" download="${desc}.js">javascript client</a>
+
 <%
 for(doc in list){
 %>
+<a name="${doc.desc}"></a>
 <%if(doc.deprecated){%>
 ## ~~${doc.desc}~~
 <%}else{%>
@@ -46,6 +49,13 @@ ${param.field}|${param.type}|<code>${@com.power.doc.utils.MarkDownEscape.escape(
 ${doc.requestUsage}
 ```
 <%}%>
+
+<%if(isNotEmpty(doc.returnDesc)){%>
+**Response-type:** <code>${doc.returnDesc.type}</code>
+
+**Response-Description:** <code>${@com.power.doc.utils.MarkDownEscape.escape(doc.returnDesc.desc)}</code>
+<%}%>
+
 <%if(isNotEmpty(doc.responseParams)){%>
 **Response-fields:**
 

@@ -25,6 +25,7 @@ package com.power.doc.template;
 import com.power.common.util.CollectionUtil;
 import com.power.common.util.StringUtil;
 import com.power.doc.builder.ProjectDocConfigBuilder;
+import com.power.doc.constants.DocGlobalConstants;
 import com.power.doc.helper.ParamsBuildHelper;
 import com.power.doc.model.*;
 import com.power.doc.utils.DocClassUtil;
@@ -37,8 +38,6 @@ import com.thoughtworks.qdox.model.JavaMethod;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
-import static com.power.doc.constants.DocGlobalConstants.NO_COMMENTS_FOUND;
 
 /**
  * @author yu 2019/12/21.
@@ -65,7 +64,7 @@ public interface IDocBuildTemplate<T> {
 
     default String paramCommentResolve(String comment) {
         if (StringUtil.isEmpty(comment)) {
-            comment = NO_COMMENTS_FOUND;
+            comment = DocGlobalConstants.NO_COMMENTS_FOUND;
         } else {
             if (comment.contains("|")) {
                 comment = comment.substring(0, comment.indexOf("|"));

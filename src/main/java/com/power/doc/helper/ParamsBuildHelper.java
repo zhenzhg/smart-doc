@@ -37,8 +37,6 @@ import com.thoughtworks.qdox.model.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static com.power.doc.constants.DocGlobalConstants.NO_COMMENTS_FOUND;
-
 /**
  * @author yu 2019/12/21.
  */
@@ -210,7 +208,7 @@ public class ParamsBuildHelper {
                     if (StringUtil.isNotEmpty(comment)) {
                         commonHandleParam(paramList, param, isRequired, comment, since, strRequired);
                     } else {
-                        commonHandleParam(paramList, param, isRequired, NO_COMMENTS_FOUND, since, strRequired);
+                        commonHandleParam(paramList, param, isRequired, DocGlobalConstants.NO_COMMENTS_FOUND, since, strRequired);
                     }
                 } else {
                     ApiParam param = ApiParam.of().setField(pre + fieldName);
@@ -263,7 +261,7 @@ public class ParamsBuildHelper {
                     if (StringUtil.isNotEmpty(comment)) {
                         commonHandleParam(paramList, param, isRequired, comment, since, strRequired);
                     } else {
-                        commonHandleParam(paramList, param, isRequired, NO_COMMENTS_FOUND, since, strRequired);
+                        commonHandleParam(paramList, param, isRequired, DocGlobalConstants.NO_COMMENTS_FOUND, since, strRequired);
                     }
                     StringBuilder preBuilder = new StringBuilder();
                     for (int j = 0; j < level; j++) {

@@ -73,57 +73,33 @@
 <script type="text/javascript">
     var api = [];
 
-    function changeFrameHeight() {
-        var ifm = document.getElementById("book_iframe");
-        ifm.height = document.documentElement.clientHeight;
-    }
+    function toHash() {
+           if(window.location.hash) { //window.onhashchange
+               var hashStr = location.hash.replace("#", "");
+               var arrtmp = hashStr.split(".");
 
-    function toPage() {
-        var page = localStorage.getItem('page');
-        var title = localStorage.getItem('title');
-        if(page) {
-           var iframe = document.getElementById("book_iframe");
-           iframe.src = page + ".html";
-           var obj = iframe.contentWindow;
-           obj.onload = function(){
-           var h2 = obj.document.getElementsByTagName('h2');
-               for(j = 0; j < h2.length; j++) {
-                   var dom = h2[j];
-                   if(dom.innerText == title){
-                       obj.scroll(0, dom.offsetTop);
-                       break;
-                   }
-               }
+               var page = arrtmp[0];
+               var title = arrtmp[1];
+
+               var iframe = document.getElementById("book_iframe");
+               iframe.src = page + ".html#"+title;
            }
-        }
-    }
+       }
 
-    toPage();
+       function changeFrameHeight() {
+           var ifm = document.getElementById("book_iframe");
+           ifm.height = document.documentElement.clientHeight;
+       }
 
-    function go(alias, desc) {
-        console.log(alias, desc);
-        var iframe = document.getElementById("book_iframe");
-        var page = localStorage.getItem('page');
+       toHash();
 
-        if(page != alias){
-            iframe.src = alias + ".html";
-        }
+       function go(alias, desc) {
+           console.log(alias, desc);
+           var iframe = document.getElementById("book_iframe");
 
-        localStorage.setItem('page', alias);
-        localStorage.setItem('title', desc);
-
-        setTimeout(() => {
-            var obj = iframe.contentWindow;
-            var h2 = obj.document.getElementsByTagName('h2');
-            for(j = 0; j < h2.length; j++) {
-                var dom = h2[j];
-                if(dom.innerText == desc){
-                    obj.scroll(0, dom.offsetTop);
-                    break;
-                }
-            }
-         }, 200)
-    }
+           iframe.src = alias + ".html#"+desc;
+           window.location.hash = alias + "."+desc
+       }
 
     changeFrameHeight();
     setInterval(function(){changeFrameHeight(); }, 500);
