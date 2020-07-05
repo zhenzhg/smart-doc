@@ -1,4 +1,5 @@
-# ${desc} <a name="${desc}"></a>
+<a name="${desc}"></a>
+# ${desc}
 
 <a href="${desc}.js" download="${desc}.js">javascript client</a>
 
@@ -51,9 +52,13 @@ ${doc.requestUsage}
 <%}%>
 
 <%if(isNotEmpty(doc.returnDesc)){%>
+<%if(isNotEmpty(doc.returnDesc.type)){%>
 **Response-type:** <code>${doc.returnDesc.type}</code>
+<%}%>
 
+<%if(isNotEmpty(doc.returnDesc.desc)){%>
 **Response-Description:** <code>${@com.power.doc.utils.MarkDownEscape.escape(doc.returnDesc.desc)}</code>
+<%}%>
 <%}%>
 
 <%if(isNotEmpty(doc.responseParams)){%>

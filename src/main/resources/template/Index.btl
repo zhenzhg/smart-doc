@@ -82,7 +82,7 @@
                var title = arrtmp[1];
 
                var iframe = document.getElementById("book_iframe");
-               iframe.src = page + ".html#"+title;
+               iframe.src = page + ".html?v=${version}#"+title;
            }
        }
 
@@ -97,7 +97,7 @@
            console.log(alias, desc);
            var iframe = document.getElementById("book_iframe");
 
-           iframe.src = alias + ".html#"+desc;
+           iframe.src = alias + ".html?v=${version}#"+desc;
            window.location.hash = alias + "."+desc
        }
 
