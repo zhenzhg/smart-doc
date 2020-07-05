@@ -1,7 +1,7 @@
-<a name="${desc}"></a>
-# ${desc}
+<a name="${name}"></a>
+# ${name}
 
-<a href="${desc}.js" download="${desc}.js">javascript client</a>
+<a href="${name}.js" download="${name}.js">javascript client</a>
 
 <%
 for(doc in list){
