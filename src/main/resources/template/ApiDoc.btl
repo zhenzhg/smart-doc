@@ -1,7 +1,9 @@
 <a name="${name}"></a>
-# ${name}
-
 <a href="${name}.js" download="${name}.js">javascript client</a>
+# ${name}
+<%if(isNotEmpty(desc)){%>
+> `${desc}`
+<%}%>
 
 <%
 for(doc in list){
@@ -12,6 +14,8 @@ for(doc in list){
 <%}else{%>
 ## ${doc.desc}
 <%}%>
+**Description:** <%if(isNotEmpty(doc.detail)){%>`${doc.detail}`<%}%>
+
 **URL:** `${doc.url}`
 
 **Type:** `${doc.type}`
@@ -21,8 +25,6 @@ for(doc in list){
 <%}%>
 
 **Content-Type:** `${doc.contentType}`
-
-**Description:** ${doc.detail}
 
 <%if(isNotEmpty(doc.headers)){%>
 **Request-headers:**
@@ -40,7 +42,7 @@ Parameter|Type|Description|Required|Since
 <%
 for(param in doc.requestParams){
 %>
-${param.field}|${param.type}|<code>${@com.power.doc.utils.MarkDownEscape.escape(param.desc)}</code>|${param.required}|${param.version}
+${param.field}|${param.type}|`${isNotEmpty(param.desc)?param.desc:'-'}`|${param.required}|${param.version}
 <%}%>
 <%}%>
 
@@ -53,11 +55,11 @@ ${doc.requestUsage}
 
 <%if(isNotEmpty(doc.returnDesc)){%>
 <%if(isNotEmpty(doc.returnDesc.type)){%>
-**Response-type:** <code>${doc.returnDesc.type}</code>
+**Response-type:** `${doc.returnDesc.type}`
 <%}%>
 
 <%if(isNotEmpty(doc.returnDesc.desc)){%>
-**Response-Description:** <code>${@com.power.doc.utils.MarkDownEscape.escape(doc.returnDesc.desc)}</code>
+**Response-Description:** `${doc.returnDesc.desc}`
 <%}%>
 <%}%>
 
@@ -69,7 +71,7 @@ Field | Type|Description|Since
 <%
 for(param in doc.responseParams){
 %>
-${param.field}|${param.type}|<code>${@com.power.doc.utils.MarkDownEscape.escape(param.desc)}</code>|${param.version}
+${param.field}|${param.type}|`${isNotEmpty(param.desc)?param.desc:'-'}`|${param.version}
 <%}%>
 <%}%>
 

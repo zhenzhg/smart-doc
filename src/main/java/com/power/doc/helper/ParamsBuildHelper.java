@@ -246,7 +246,7 @@ public class ParamsBuildHelper {
                                 gicName = fieldGicName.substring(0, fieldGicName.indexOf("["));
                             }
 
-                            processedType = "array of " + (JavaClassValidateUtil.isPrimitive(gicName) ? processTypeNameForParams(gicName) : gicName);
+                            processedType = "array of " + (JavaClassValidateUtil.isPrimitive(gicName) ? processTypeNameForParams(gicName) : JavaClassUtil.getClassSimpleName(gicName));
 
                         } else {
                             processedType = isShowJavaType ? typeSimpleName : processTypeNameForParams(typeSimpleName.toLowerCase());
