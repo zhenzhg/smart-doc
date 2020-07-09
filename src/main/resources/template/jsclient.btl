@@ -1,0 +1,42 @@
+import fetch from '../utils/fetch'
+
+<%
+for(doc in list){
+%>
+
+
+/**
+ * @description ${doc.detail}
+ <%
+ var paramStr = "";
+ if(isNotEmpty(doc.requestParams)){
+     for(param in doc.requestParams)
+     {
+         if(!strutil.contain(param.field, "└─")){
+             paramStr = paramStr + param.field + ",";
+             print(" * @param ");
+             print(param.field);
+             print(" {");
+             print(param.type);
+             print("} ");
+             print(param.desc);
+             print("\n");
+         }
+     }
+     if(strutil.endWith(paramStr,",")){
+         paramStr = strutil.subStringTo(paramStr, 0, strutil.length(paramStr)-1);
+     }
+
+     if(strutil.contain(paramStr, ",")){
+         paramStr = "\n    " + strutil.replace(paramStr, ",", ",\n    ") + "\n";
+     }
+ }
+
+ %>
+ <%if(isNotEmpty(doc.returnDesc)){%>
+ * @return {${doc.returnDesc.type}} ${doc.returnDesc.desc}
+ <%}%>
+ * @doc https://dev.188yd.com/static/apidoc/api.html?v=${version}#${name}.${doc.name}
+ */
+export const ${doc.name} = ({${paramStr}}) => fetch('/${name}/${doc.name}', {${paramStr}});
+<%}%>
