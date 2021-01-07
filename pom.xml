@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>smart-doc</artifactId>
     <packaging>jar</packaging>
-    <version>1.8.9-SNAPSHOT</version>
+    <version>1.9.12</version>
 
     <name>smart-doc</name>
     <url>https://github.com/shalousun/smart-doc.git</url>
@@ -103,12 +103,12 @@
         <repository>
             <id>nexus-releases</id>
             <name>Nexus Release Repository</name>
-            <url>http://192.168.1.220:8081/nexus/content/repositories/releases</url>
+            <url>http://oa-mvn.188yd.com:8081/nexus/content/repositories/releases</url>
         </repository>
         <snapshotRepository>
             <id>nexus-snapshots</id>
             <name>Nexus Snapshot Repository</name>
-            <url>http://192.168.1.220:8081/nexus/content/repositories/snapshots</url>
+            <url>http://oa-mvn.188yd.com:8081/nexus/content/repositories/snapshots</url>
         </snapshotRepository>
     </distributionManagement>
     <build>

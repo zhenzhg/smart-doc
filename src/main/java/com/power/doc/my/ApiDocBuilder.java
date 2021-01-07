@@ -27,7 +27,7 @@ public class ApiDocBuilder {
             apiConfig.getSourceCodePaths().forEach(sourceCodePath -> sourceCodePath.setPath(rootPath + FILE_SEPARATOR + sourceCodePath.getPath()));
 
             HtmlApiDocBuilder.buildApiDoc(apiConfig);
-            PostmanJsonBuilder.buildApiDoc(apiConfig);
+            HtmlOpenApiDocBuilder.buildApiDoc(apiConfig);
 
         } catch (IOException e) {
             e.printStackTrace();

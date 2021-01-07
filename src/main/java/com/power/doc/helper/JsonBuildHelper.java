@@ -53,13 +53,21 @@ public class JsonBuildHelper {
      * @return String
      */
     public static String buildReturnJson(JavaMethod method, ProjectDocConfigBuilder builder) {
+        return buildReturnJson(method, builder, false);
+    }
+
+    public static String buildReturnJson(JavaMethod method, ProjectDocConfigBuilder builder, boolean isApiReturn) {
         if (method.getReturns().isVoid()) {
             return "This api return nothing.";
         }
         ApiReturn apiReturn = DocClassUtil.processReturnType(method.getReturnType().getGenericCanonicalName());
         String returnType = apiReturn.getGenericCanonicalName();
         String typeName = apiReturn.getSimpleName();
-        return JsonFormatUtil.formatJson(buildJson(typeName, returnType, Boolean.TRUE, 0, new HashMap<>(), builder));
+        String json = buildJson(typeName, returnType, Boolean.TRUE, 0, new HashMap<>(), builder);
+        if(isApiReturn){
+            json =  "{\"code\": 0,\"data\":" + json +",\"message\":\"\",\"timestamp\":\"1610007672784\"}";
+        }
+        return JsonFormatUtil.formatJson(json);
     }
 
     /**
