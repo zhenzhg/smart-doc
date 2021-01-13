@@ -616,12 +616,12 @@ public class OpenApiDocBuildTemplate implements IDocBuildTemplate<ApiDoc> {
         apiParam.setDesc("时间戳").setVersion(DocGlobalConstants.DEFAULT_VERSION);
         defList.add(apiParam);
 
-        apiParam = new ApiParam();
-        apiParam.setField("merchtId");
-        apiParam.setType("string");
-        apiParam.setRequired(true);
-        apiParam.setDesc("商户号").setVersion(DocGlobalConstants.DEFAULT_VERSION);
-        defList.add(apiParam);
+//        apiParam = new ApiParam();
+//        apiParam.setField("merchtId");
+//        apiParam.setType("string");
+//        apiParam.setRequired(true);
+//        apiParam.setDesc("商户号").setVersion(DocGlobalConstants.DEFAULT_VERSION);
+//        defList.add(apiParam);
 
         apiParam = new ApiParam();
         apiParam.setField("sign");
